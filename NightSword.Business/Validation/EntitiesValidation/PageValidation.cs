@@ -6,13 +6,14 @@ using System.Text;
 
 namespace NightSword.Business.Validation.EntitiesValidation
 {
-   public class CategoryValidation: AbstractValidator<CategoryDto>
+    public class PageValidation: AbstractValidator<PageDto>
     {
         //Bu Validationları hazırlamamızın en önemli sebebi tabikide performans ve guvenlik benm entity bazında hazırlamıs oldugum sorguları Db'ye gitmeden direk sorgulamayı yapmıs oluyorum aksi halde direk db'ye gider veri db'ye kaydedilme sartlarına bakar gereksiz yere db'ye bilgi tasımanın onune gecilirek performans kaybı onlendigi gibi tum sorgularıda tek bir yerde toplamıs olduk.
-        public CategoryValidation()
+
+        public PageValidation()
         {
-            RuleFor(x => x.Name).NotEmpty().WithMessage("This fields cannot be empty..!").MaximumLength(140).WithMessage("You cannot use more than 140 character..!");
-            
+            RuleFor(x => x.Title).NotEmpty().WithMessage("This fields cannot be empty..!").MinimumLength(2).WithMessage("Minumum Length is 2");
+            RuleFor(x => x.Content).NotEmpty().WithMessage("This fields cannot be empty..!").MinimumLength(4).WithMessage("Minumum Length is 4");
         }
     }
 }

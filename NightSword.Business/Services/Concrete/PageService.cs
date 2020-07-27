@@ -22,24 +22,22 @@ namespace NightSword.Business.Services.Concrete
         }
         public void Add(PageDto model)
         {
-            Page obj = _unitOfWork.Page.Find(x => x.Id == model.Id);
+            
 
-            if (obj==null)
+            model.Slug = model.Title.ToLower().Replace(" ", "-");
+            model.Sorting = 100;
+
+            var slug=_unitOfWork.Page.Find(x => x.Slug == model.Slug);
+
+            if (slug ==null)
             {
-                obj.Slug = obj.Title.ToLower().Replace(" ", "-");
-                obj.Sorting = 100;
+               
+                Page page = _mapper.Map<Page>(model);
+                _unitOfWork.Page.Add(page);
+                _unitOfWork.SaveChange();
 
-                var slug = _unitOfWork.Page.Find(x => x.Slug == obj.Slug);
-
-                if (slug==null)
-                {
-                    Page page = _mapper.Map<Page>(obj);
-                    _unitOfWork.Page.Add(page);
-                    _unitOfWork.SaveChange();
-                }
-              
             }
-           
+
         }
 
         public void Delete(int id)

@@ -90,7 +90,7 @@
                 cfg.AddProfile(new AutoMapping());
             });
             var mapper = config.CreateMapper();
-            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(typeof(Startup)); yada klasik sekilde yani services.AddAutoMapper(typeof(AutoMapping)); sekildede eklenebilir.
 
 
 	7.3.Business Katmani üzerinde sag tiklayip add new file deyip Logger dosyasi açilir.
@@ -106,6 +106,11 @@
 				7.5.1.1.Abstract Klasorunun icerisine Interface class'i açilir.I(EntityName)Service adýnda.Herbir Entity için tek tek yapýlýr.
 			7.5.2.Services klasoru icerisine Concrete Klasoru acýlýr.
 				7.5.2.1.Concrete Klasoru icerisine (EntityName)Service class'i acilir ve I(EntityName)Repository'den kalýtým alýr.Gerekli Crud islemleri yapilir.
+			7.6.3.Service katmanýndaki dependncy injectionslar startup.cs' eklenir.
+			     services.AddScoped<IUnitOfWork, EfUnitOfWork>();
+                 services.AddScoped<ICategoryService, CategoryService>();
+                 services.AddScoped<IPageService, PageService>();
+
 	7.6.Business Katmani üzerinde sag tiklayip add new file deyip Validation dosyasi açilir.
 		7.6.1.Validation klasoru icerisine EntitiesValidation klasoru acilir.
 			7.6.1.1.EntitiesValidation klasoru icerisine (EntityName)Validation classý acilir.Paketlerden FluentValidation.AspNetCore indirilir sebebi ise AbstractValidator ile class'ýmýzý extent etmek için.Olusacak olan her entity için yeniden eklenir.
@@ -121,7 +126,7 @@
 
 
 		
-Not : Yeni bir Entity girildiðinde Sýralý olarak Katmanlar Arasý Ýliþkiyi Özetlersek;
+Not 1 : Yeni bir Entity girildiðinde Sýralý olarak Katmanlar Arasý Ýliþkiyi Özetlersek;
 
 	1.Kernel Katmanýna Tekrar dokunmamýza gerek yok
 	2.Entity Katmaný
@@ -132,7 +137,7 @@ Not : Yeni bir Entity girildiðinde Sýralý olarak Katmanlar Arasý Ýliþkiyi Özetle
 	7.Business Katmaný	(UnitOfWork islemleri halledilir.Abstract ve Concrete olarak.)
 	No:Gerekli Relationslar Web Projesinde Startup.cs'de belirtilir.
 
-Not:UNÝT OF WORK DESÝGN PATTERN:
+Not 2:UNÝT OF WORK DESÝGN PATTERN:
 
 UnitofWork Design Pattern Nedir?
 Bu pattern, iþ katmanýnda yapýlan her deðiþikliðin anlýk olarak database e yansýmasý yerine, iþlemlerin toplu halde tek bir kanaldan gerçekleþmesini saðlar.
@@ -145,3 +150,9 @@ Bu ve bunun gibi, birden fazla iþlemi tek bir iþlem olarak düþünmemiz gereken ye
 
 Nasýl Kullanýlýr?
 UnitofWork genelde repository pattern ile uygulanýr.Ýlgili Kod Bloklarýný Business Katmaný icerisindeki UnitOfWork Klasoru icerisinde gorebilirsiniz.
+
+Not 3:IQuarable ile IEnurable arasýndaki fark:
+
+-IQuarable oluþturulan filtreye göre önce filtreleme yapýyor örneðin aktif verileri listelemek istedigimde   linq to gidiyor daha SQL'deyken filtreleme yapýyor ve benim istediðim listeyi yani aktif kullanýcýlarý Ram'e Çýkarýyor.
+2.Fark ise olusturduðu listeyi oluþturup bekletiyor bu yüzden sonuna ToList() beklemez ve ben istediðim zaman çekebiliyorum.
+-IEnurable bu sorgulamayý yaptýgýmda ise kullanýcýlarýn tamamýný Ram'e gereksiz yere cýkarýp sonra sorgulamayý yapýp bana döndürüyor.

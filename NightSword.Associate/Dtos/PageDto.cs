@@ -11,8 +11,7 @@ namespace NightSword.Associate.Dtos
         public string Title { get; set; }
         public string Slug { get; set; }
         [Required]
-        public string Content { get; set; }
-        [Required]
+        public string Content { get; set; }     
         public int Sorting { get; set; }
     }
 }
