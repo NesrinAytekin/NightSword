@@ -68,7 +68,7 @@ namespace NightSword.Web.Areas.Admin.Controllers
                 
                 _pageService.Update(pageDto);
                 TempData["Success"] = "Congurulation! Page Has Been Changed";
-                return RedirectToAction("Edit", new { id = pageDto.Id });
+                return RedirectToAction("Index", new { id = pageDto.Id });
             }
             else
             {
@@ -93,6 +93,12 @@ namespace NightSword.Web.Areas.Admin.Controllers
                 
             }
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult ReOrder(int[] id)
+        {
+            return View();
         }
 
     }

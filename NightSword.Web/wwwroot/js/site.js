@@ -8,7 +8,7 @@ $(function () {
 
     if ($("a.confirmDeletion").length) {
         $("a.confirmDeletion").click(() => {
-            if (!confirm("Confirm deletetion")) return false;
+            if (!confirm("Are Sure To Delete This Page?")) return false;
         });
     }
 

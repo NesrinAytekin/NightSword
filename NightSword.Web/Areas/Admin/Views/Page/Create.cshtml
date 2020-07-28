@@ -28,7 +28,7 @@
 
                         <div class="form-group">
                             <label asp-for="Content" class="control-label"></label>
-                            <input asp-for="Content"></input>
+                            <textarea asp-for="Content" class="form-control"></textarea>
                             <span asp-validation-for="Content" class="text-danger"></span>
                         </div>
 
@@ -50,8 +50,8 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
-    @*bu script: ckeditörünü Content için yerleştir diyoruz aynısını edittede yapıyoruz tabi yukarıda input değil textarea olarak değiştiriyoruz Bu sayede veri olarak değil word dosyası gibi gelecek content veri kısmı
+    @*bu script: ckeditörünü Content için yerleştir diyoruz aynısını edittede yapıyoruz tabi yukarıda input değil textarea olarak değiştiriyoruz Bu sayede veri olarak değil word dosyası gibi gelecek content veri kısmı*@
         <script>
         CKEDITOR.replace("Content");
-        </script>*@
+        </script>
 }

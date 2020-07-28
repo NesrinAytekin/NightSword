@@ -14,7 +14,7 @@
                         <h4>List Of Pages</h4>
                     </div>
                     <div class="card-body">
-                        <table>
+                        <table class="table sorting" id="pages">
                             <thead>
                                 <tr>
                                     <th>Title</th>
@@ -31,7 +31,10 @@
                                         <td>
                                             <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Details</a>
                                             <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
-                                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                                            @if (item.Slug != "home")
+                                            {
+                                                <a asp-action="Delete" class="btn btn-danger confirmDeletion" asp-route-id="@item.Id">Delete</a>
+                                            }
                                         </td>
                                     </tr>
                                 }
