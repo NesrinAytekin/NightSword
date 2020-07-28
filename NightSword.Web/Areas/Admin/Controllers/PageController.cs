@@ -96,9 +96,18 @@ namespace NightSword.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult ReOrder(int[] id)
+        public void ReOrder(int[] id)
         {
-            return View();
+            int count = 1;
+
+            foreach (var pageId in id)
+            {
+                var page = _pageService.Get(pageId);
+                page.Sorting = count;
+                _pageService.Update(page);
+                count++;
+            }
+            return;
         }
 
     }
