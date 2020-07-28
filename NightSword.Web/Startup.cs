@@ -1,15 +1,19 @@
 using AutoMapper;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NightSword.Associate.Dtos;
 using NightSword.Business.AutoMapper;
 using NightSword.Business.Services.Abstract;
 using NightSword.Business.Services.Concrete;
 using NightSword.Business.UnitofWork.Abstract;
 using NightSword.Business.UnitofWork.Concrete;
+using NightSword.Business.Validation.EntitiesValidation;
 using NightSword.DataAccess.Context;
 using NightSword.DataAccess.Repository.Abstract;
 using NightSword.DataAccess.Repository.Concrete;
@@ -28,7 +32,10 @@ namespace NightSword.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+               .AddFluentValidation();
+            services.AddTransient<IValidator<CategoryDto>, CategoryValidation>();
+            services.AddTransient<IValidator<PageDto>, PageValidation>();
 
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
@@ -72,7 +79,7 @@ namespace NightSword.Web
 
             app.UseEndpoints(endpoints =>
             {
-                
+
 
                 endpoints.MapControllerRoute(
                    name: "areas",

@@ -37,8 +37,6 @@ namespace NightSword.Web.Areas.Admin.Controllers
                 return View(pageDto);
             }
 
-
-
         }
         public ActionResult<List<PageDto>> Index()
         {
@@ -55,7 +53,47 @@ namespace NightSword.Web.Areas.Admin.Controllers
             }
             return View(page);
         }
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            PageDto page = _pageService.Get(id);
+            return View(page);
+        }
 
+        [HttpPost]
+        public ActionResult Edit(PageDto pageDto)
+        {
+             if (ModelState.IsValid)
+            {
+                
+                _pageService.Update(pageDto);
+                TempData["Success"] = "Congurulation! Page Has Been Changed";
+                return RedirectToAction("Edit", new { id = pageDto.Id });
+            }
+            else
+            {
+                TempData["Error"] = "Sorry!! Page Hasn't Been Added";
+                return View(pageDto);
+            }
+        }
+
+        public ActionResult Delete(int id)
+        {
+            PageDto page = _pageService.Get(id);
+
+            if (page==null)
+            {
+                TempData["Error"] = "The Page doesn't exist";
+            }
+            else
+            {
+                _pageService.Delete(id);
+                TempData["Success"] = "The Page has been deleted";
+                return RedirectToAction("Index");
+                
+            }
+            return RedirectToAction("Index");
+        }
 
     }
 }

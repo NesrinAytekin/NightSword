@@ -114,6 +114,10 @@
 	7.6.Business Katmani üzerinde sag tiklayip add new file deyip Validation dosyasi açilir.
 		7.6.1.Validation klasoru icerisine EntitiesValidation klasoru acilir.
 			7.6.1.1.EntitiesValidation klasoru icerisine (EntityName)Validation classý acilir.Paketlerden FluentValidation.AspNetCore indirilir sebebi ise AbstractValidator ile class'ýmýzý extent etmek için.Olusacak olan her entity için yeniden eklenir.
+			7.6.1.2.Validationslarýmýzý Startup.cs'e  içerisine 
+			.AddFluentValidation();
+            services.AddTransient<IValidator<CategoryDto>, CategoryValidation>();
+            services.AddTransient<IValidator<PageDto>, PageValidation>();ekleriz.
 		7.6.2.Validation klasoru icerisine ErrorResult klasoru acilir.
 			7.6.2.1.ErrorResult klasoru icerisine ErrorModel classý acilir.Model alacagim class.
 			7.6.2.2.ErrorResult klasoru icerisine ErrorResponse classý acilir.Ve Error Modelimin tipinde Error Listesi olustururuz.

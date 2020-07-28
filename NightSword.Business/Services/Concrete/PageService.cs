@@ -78,14 +78,28 @@ namespace NightSword.Business.Services.Concrete
             return model;
         }
 
-
+        
         public void Update(PageDto model)
         {
-            Page postObj = _mapper.Map<Page>(model);
-            _unitOfWork.Page.Update(postObj);
-            _unitOfWork.SaveChange();
-        }
+            var ns = _unitOfWork.Page.Find(x => x.Id == model.Id);
 
-       
+            if (ns!=null)
+            {
+                model.Slug = model.Title.ToLower().Replace(" ", "-");
+                model.Sorting = 10;
+
+                var slug = _unitOfWork.Page.Find(x => x.Slug == model.Slug);
+
+                if (slug == null)
+                {
+
+                    Page page = _mapper.Map<PageDto, Page>(model,ns);
+                    _unitOfWork.Page.Update(page);
+                    _unitOfWork.SaveChange();
+
+                }
+            }      
+
+        }
     }
 }
