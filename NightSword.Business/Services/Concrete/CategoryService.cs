@@ -57,16 +57,24 @@ namespace NightSword.Business.Services.Concrete
 
         public IList<CategoryDto> GetCategories()
         {
-            var categories = _unitOfWork.Category.GetAll().OrderByDescending(x => x.CreateDate);
-            IList<CategoryDto> model = _mapper.Map<IList<CategoryDto>>(categories);
+            var categories = _unitOfWork.Category.GetAll().OrderByDescending(x => x.CreateDate).ToList();
+            var model = _mapper.Map<List<Category>, List<CategoryDto>>(categories);
             return model;
+
         }
 
         public void Update(CategoryDto model)
         {
-            Category categoryObj = _mapper.Map<Category>(model);
-            _unitOfWork.Category.Update(categoryObj);
-            _unitOfWork.SaveChange();
+
+
+            var obj = _unitOfWork.Category.Find(x => x.Id == model.Id);
+
+            if (obj!=null)
+            {
+                Category category = _mapper.Map<CategoryDto, Category>(model, obj);
+                _unitOfWork.Category.Update(category);
+                _unitOfWork.SaveChange();
+            }
         }
     }
 }

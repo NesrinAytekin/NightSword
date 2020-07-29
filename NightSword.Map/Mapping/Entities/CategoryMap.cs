@@ -13,15 +13,15 @@ namespace NightSword.Map.Mapping.Entities
         //EntityTypeBuilder icin usinglere Microsoft.EntityFrameworkCore.Metadata.Builders eklenir.
         public override void Configure(EntityTypeBuilder<Category> builder)
         {
-            builder.Property(x => x.Name).HasMaxLength(25).IsRequired(true);
+            builder.Property(x => x.Name).HasMaxLength(256).IsRequired(true);
             builder.Property(x => x.Description).HasMaxLength(256).IsRequired(false);
             builder.Property(x => x.Slug).IsRequired(false);
-            builder.Property(x => x.Sorting).IsRequired(true);
+            builder.Property(x => x.Sorting).IsRequired(false);
 
-            //builder.HasMany(x=>x.Products)
-            //    .WithOne(x=>x.Category)
-            //    .HasForeignKey(x=>x.CategoryId)
-            //    .OnDelete(DeleteBehavior.Cascade);
+            builder.HasMany(x => x.Products)
+                .WithOne(x => x.Category)
+                .HasForeignKey(x => x.CategoryId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             base.Configure(builder);
 

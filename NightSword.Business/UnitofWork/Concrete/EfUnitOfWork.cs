@@ -17,9 +17,10 @@ namespace NightSword.Business.UnitofWork.Concrete
             this._db = db ?? throw new ArgumentNullException("DataBase can't be null");//(??) degilse anlamındadır.Db Bos ise bu mesajı ilet diyoruz.
         }
 
-        private ICategoryRepository _categoryRepository;
-        
         //Her bir entity icin bu islem tamamlanır.
+
+        private ICategoryRepository _categoryRepository;        
+        
         public ICategoryRepository Category
         {
             get { return _categoryRepository ?? (_categoryRepository = new EfCategoryRepository(_db)); }
@@ -30,6 +31,12 @@ namespace NightSword.Business.UnitofWork.Concrete
         public IPageRepository Page
         {
             get { return _pageRepository ?? (_pageRepository = new EfPageRepository(_db)); }
+        }
+
+        private IProductRepository _productRepository;
+        public IProductRepository Product
+        {
+            get { return _productRepository ?? (_productRepository = new EfProductRepository(_db)); }
         }
 
         //Not:Disposable Garbage Collector'a fırsat vermeden Ram'de temizlik islemini yapar.

@@ -36,6 +36,7 @@ namespace NightSword.Web
                .AddFluentValidation();
             services.AddTransient<IValidator<CategoryDto>, CategoryValidation>();
             services.AddTransient<IValidator<PageDto>, PageValidation>();
+            services.AddTransient<IValidator<ProductDto>, ProductValidation>();
 
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
@@ -44,6 +45,8 @@ namespace NightSword.Web
             services.AddScoped<IUnitOfWork, EfUnitOfWork>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IPageService, PageService>();
+            services.AddScoped<IProductService, ProductService>();
+
 
 
 

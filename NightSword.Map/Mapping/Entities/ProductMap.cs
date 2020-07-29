@@ -18,11 +18,11 @@ namespace NightSword.Map.Mapping.Entities
             builder.Property(x => x.Image).IsRequired(false);
             builder.Property(x => x.Slug).IsRequired(false);
 
-            //builder.HasOne(x => x.Category)
-            //    .WithMany(x=>x.)
+            builder.HasOne(x => x.Category)
+                .WithMany(x => x.Products)
+                .HasForeignKey(x => x.CategoryId);
 
-
-            //base.Configure(builder);
+            base.Configure(builder);
         }
     }
 }

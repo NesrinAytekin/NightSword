@@ -10,6 +10,7 @@ namespace NightSword.Business.UnitofWork.Abstract
     {
         ICategoryRepository Category { get; }  
         IPageRepository Page { get; }
+        IProductRepository Product { get; }
         void SaveChange();
     }
 }
