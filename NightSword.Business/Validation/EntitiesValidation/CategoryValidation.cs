@@ -11,7 +11,7 @@ namespace NightSword.Business.Validation.EntitiesValidation
         //Bu Validationları hazırlamamızın en önemli sebebi tabikide performans ve guvenlik benm entity bazında hazırlamıs oldugum sorguları Db'ye gitmeden direk sorgulamayı yapmıs oluyorum aksi halde direk db'ye gider veri db'ye kaydedilme sartlarına bakar gereksiz yere db'ye bilgi tasımanın onune gecilirek performans kaybı onlendigi gibi tum sorgularıda tek bir yerde toplamıs olduk.
         public CategoryValidation()
         {
-            RuleFor(x => x.Name).NotEmpty().WithMessage("This fields cannot be empty..!").MinimumLength(3).WithMessage("Minumum Length is 3!");
+            RuleFor(x => x.Name).NotEmpty().WithMessage("This field cannot be empty..!").MinimumLength(3).WithMessage("Minumum Length is 3!");
             
         }
     }

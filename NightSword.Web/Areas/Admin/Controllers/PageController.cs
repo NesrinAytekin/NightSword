@@ -61,6 +61,7 @@ namespace NightSword.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(PageDto pageDto)
         {
              if (ModelState.IsValid)
