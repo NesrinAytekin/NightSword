@@ -13,5 +13,6 @@ namespace NightSword.Business.Services.Abstract
         public void Delete(int id);
         public PageDto Get(int id);
         public IList<PageDto> GetPages();
+        public void ReOrder(int[] id);
     }
 }

@@ -97,19 +97,18 @@ namespace NightSword.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public void ReOrder(int[] id)
+        public ActionResult<IList<PageDto>> ReOrder(int[] id)
         {
-            int count = 1;
-
-            foreach (var pageId in id)
+            foreach (var item in id)
             {
-                var page = _pageService.Get(pageId);
-                page.Sorting = count;
-                _pageService.Update(page);
-                count++;
+               var pagedto = _pageService.GetPages();
+                _pageService.ReOrder(id);
             }
-            return;
+            return Ok();
         }
 
     }
 }
+
+
+

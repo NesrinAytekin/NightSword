@@ -101,6 +101,19 @@ namespace NightSword.Business.Services.Concrete
             }      
 
         }
- 
+
+        public void ReOrder(int[] id)
+        {
+            int count = 1;
+            foreach (var pageid in id)
+            {
+                Page page = _unitOfWork.Page.GetById(pageid);
+                page.Sorting = count;
+                _unitOfWork.Page.Update(page);
+                _unitOfWork.SaveChange();
+                count++;
+            }
+            return;
+        }
     }
 }
