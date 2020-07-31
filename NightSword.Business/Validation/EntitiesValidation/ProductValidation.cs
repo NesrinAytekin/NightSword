@@ -12,7 +12,7 @@ namespace NightSword.Business.Validation.EntitiesValidation
         {
             RuleFor(x => x.Name).NotEmpty().WithMessage("This fields cannot be empty..!").MinimumLength(2).WithMessage("Minumum Length is 2");
             RuleFor(x => x.Description).NotEmpty().WithMessage("This fields cannot be empty..!").MinimumLength(2).WithMessage("Minumum Length is 2");
-            RuleFor(x => x.Price).NotEmpty().WithMessage("This fields cannot be empty..!").GreaterThan(0).WithMessage("Ürün fiyatı 5'ten fazla olmalıdır");
+            RuleFor(x => x.Price).NotEmpty().WithMessage("This fields cannot be empty..!").GreaterThan(0).WithMessage("Price must me more than 0");
             RuleFor(x => x.CategoryId).NotNull().WithMessage("Please Choose A Category");
 
         }

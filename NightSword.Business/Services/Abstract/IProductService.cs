@@ -12,6 +12,8 @@ namespace NightSword.Business.Services.Abstract
         public void Update(ProductDto model);
         public void Delete(int id);
         public ProductDto Get(int id);
+        public IList<CategoryDto> GetCategories();
+
         public IList<ProductDto> GetProducts();
     }
 }
