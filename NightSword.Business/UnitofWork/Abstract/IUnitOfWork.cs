@@ -12,5 +12,6 @@ namespace NightSword.Business.UnitofWork.Abstract
         IPageRepository Page { get; }
         IProductRepository Product { get; }
         void SaveChange();
+      
     }
 }

@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using NightSword.Associate.Dtos;
+using NightSword.Associate.Vms;
 using NightSword.Business.Services.Abstract;
 using NightSword.Business.UnitofWork.Abstract;
 using NightSword.Entities.Entity;
@@ -92,6 +94,13 @@ namespace NightSword.Business.Services.Concrete
             }
         }
 
+        //public IList<ProductOfCategoryVM> GetAll()
+        //{
+        //    var products = _unitOfWork.Product.GetAll.OrderByDescending(x => x.Price).ToList();
+        //    var model = _mapper.Map<List<Product>, List<ProductOfCategoryVM>>(products);
+        //    return model;
+        //}
+
         public IList<CategoryDto> GetCategories()
         {
             //var products = _unitOfWork.Product.FindByList(x=>x.CategoryId==categoryId).OrderBy(x=>x.Category.Name).ToList();
@@ -111,7 +120,8 @@ namespace NightSword.Business.Services.Concrete
 
         public IList<ProductDto> GetProducts()
         {
-            var products = _unitOfWork.Product.GetAll().OrderByDescending(x => x.Price).ToList();
+            var products = _unitOfWork.Product.GetAll(include: x => x
+               .Include(z => z.Category)).OrderByDescending(x => x.Price).ToList();
 
             var model = _mapper.Map<List<Product>, List<ProductDto>>(products);
 

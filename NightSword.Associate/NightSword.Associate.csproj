@@ -10,10 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Vms\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\NightSword.Entities\NightSword.Entities.csproj" />
   </ItemGroup>
 

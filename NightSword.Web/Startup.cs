@@ -82,7 +82,10 @@ namespace NightSword.Web
 
             app.UseEndpoints(endpoints =>
             {
-
+                endpoints.MapControllerRoute(
+                   "page",
+                   "{slug?}",
+                   defaults: new { controller = "Page", action = "Page" });
 
                 endpoints.MapControllerRoute(
                    name: "areas",

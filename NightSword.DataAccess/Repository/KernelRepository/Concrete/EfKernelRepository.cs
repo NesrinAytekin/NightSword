@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using NightSword.DataAccess.Context;
 using NightSword.Kernel.Repository.Abstract;
 using System;
@@ -55,8 +56,14 @@ namespace NightSword.DataAccess.Repository.KernelRepository.Concrete
             throw new NotImplementedException();
         }
 
-        public ICollection<T> GetAll()
+        public ICollection<T> GetAll(Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
         {
+            IQueryable<T> query = table;
+            if (include != null)
+            {
+                query = include(query);
+                return query.ToList();
+            }
             return table.ToList();
         }
 

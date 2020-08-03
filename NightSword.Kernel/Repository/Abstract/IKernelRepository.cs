@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Query;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
@@ -19,7 +21,7 @@ namespace NightSword.Kernel.Repository.Abstract
         T GetById(int id);
         T Find(Expression<Func<T, bool>> exp);
 
-        ICollection<T> GetAll();
+        ICollection<T> GetAll(Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
         ICollection<T> FindByList(Expression<Func<T, bool>> exp);
     }
 }
