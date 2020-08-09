@@ -88,6 +88,11 @@ namespace NightSword.Web
                    defaults: new { controller = "Page", action = "Page" });
 
                 endpoints.MapControllerRoute(
+                   "product",
+                   "product/{categorySlug}",
+                   defaults: new { controller = "Product", action = "ProductsByCategory" });
+
+                endpoints.MapControllerRoute(
                    name: "areas",
                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
