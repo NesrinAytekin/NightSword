@@ -12,12 +12,12 @@ namespace NightSword.Web.Controllers
     {
 
         private readonly IProductService _productService;
-        private readonly ICategoryService _categoryService;
+  
 
-        public ProductController(IProductService productService, ICategoryService categoryService)
+        public ProductController(IProductService productService)
         {
             this._productService = productService;
-            this._categoryService = categoryService;
+          
         }
         public IActionResult Index()
         {

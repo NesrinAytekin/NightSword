@@ -17,6 +17,7 @@ using NightSword.Business.Validation.EntitiesValidation;
 using NightSword.DataAccess.Context;
 using NightSword.DataAccess.Repository.Abstract;
 using NightSword.DataAccess.Repository.Concrete;
+using System;
 
 namespace NightSword.Web
 {
@@ -32,11 +33,17 @@ namespace NightSword.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMemoryCache();
+            services.AddSession(options =>
+            {                
+                options.IdleTimeout = TimeSpan.FromDays(7);//7 Günlüðüne ürünleri  sepette tut diyoruz.
+            });
             services.AddControllersWithViews()
                .AddFluentValidation();
             services.AddTransient<IValidator<CategoryDto>, CategoryValidation>();
             services.AddTransient<IValidator<PageDto>, PageValidation>();
             services.AddTransient<IValidator<ProductDto>, ProductValidation>();
+            
 
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
@@ -47,10 +54,11 @@ namespace NightSword.Web
             services.AddScoped<IPageService, PageService>();
             services.AddScoped<IProductService, ProductService>();
 
-
-
-
             //============AutoMapper===========
+
+            services.AddAutoMapper(typeof(AutoMapping));
+
+
             //AutoMapper.Extensions.Microsoft.DependcyInjection Paketi indirilir.Inject Edebilmemiz icin AutoMapper'ý
             //var config = new AutoMapper.MapperConfiguration(cfg =>
             //{
@@ -59,7 +67,9 @@ namespace NightSword.Web
 
             //var mapper = config.CreateMapper();
             //services.AddAutoMapper(typeof(Startup));
-            services.AddAutoMapper(typeof(AutoMapping));
+
+
+
         }
 
 
@@ -77,6 +87,9 @@ namespace NightSword.Web
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseSession();
+
 
             app.UseAuthorization();
 
