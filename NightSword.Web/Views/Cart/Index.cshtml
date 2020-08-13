@@ -37,7 +37,7 @@
                                     <td>
                                         <a asp-action="Add" asp-route-id="@item.ProductId" class="btn btn-success btn-sm">+</a>
                                         <a asp-action="Decrease" asp-route-id="@item.ProductId" class="btn btn-warning btn-sm">-</a>
-                                        <a asp-action="Remove" asp-route-id="@item.ProductId" class="btn btn-danger btn-sm">Remove</a>
+                                        <a asp-action="Remove" asp-route-id="@item.ProductId" ><i class='fas fa-trash-alt' style='font-size:24px'></i></a>
                                     </td>
                                     <td>@item.Price.ToString("C2")</td>
                                     <td>@Model.CartItems.Where(x => x.ProductId == item.ProductId).Sum(x => x.Quantity * x.Price).ToString("C2")</td>

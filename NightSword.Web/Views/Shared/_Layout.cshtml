@@ -3,9 +3,11 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
     <title>@ViewData["Title"] - NightSword</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 </head>
 <body>
     <header>
@@ -19,6 +21,7 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         @await Component.InvokeAsync("MainMenu")
+                        
                     </ul>
                 </div>
             </div>
@@ -30,6 +33,9 @@
             <div class="row">
                 <div class="col-md-3">
                     @await Component.InvokeAsync("Category")
+                    <div class="smallcart  mt-3 bg-dark text-light">
+                        @await Component.InvokeAsync("SmallCart")
+                    </div>
                 </div>
                 <div class="col-md-9">
                     @RenderBody()
